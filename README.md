@@ -1,2 +1,2 @@
-# ScorePredictor
-Soccer Score Predictor
+# YoutubeToMP3
+Automatically converts from YouTube to MP3
