@@ -6,6 +6,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 
+# options = webdriver.ChromeOptions()
+# options.add_argument('--ignore-certificate-errors')
+# options.add_argument('--ignore-ssl-errors')
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
 def download_mp3(youtube_link):
@@ -16,20 +19,20 @@ def download_mp3(youtube_link):
     # Find the input field for the YouTube link
     input_field = driver.find_element(By.ID, "video")
 
-
     # Find the convert button
-    convert_button = driver.find_element(By.LINK_TEXT, "Convert")
+    convert_button = driver.find_element(By.XPATH, "//*[@id='converter']/div[3]/div[2]/input")
 
     # Paste link and click convert button
     input_field.send_keys(youtube_link)
     convert_button.click()
 
     # Wait for the conversion to complete and find the download link
-    time.sleep(10)  # Adjust this based on the website's conversion time
-    download_button = driver.find_element(By.LINK_TEXT, "Download")
+    time.sleep(20)  # Adjust this based on the website's conversion time
+    download_button = driver.find_element(By.XPATH, "//*[@id='download']/a[1]")
 
     # Click the download link
     download_button.click()
+    time.sleep(5)
 
 def is_valid_youtube_url(url):
     youtube_regex = re.compile(
