@@ -1,4 +1,3 @@
-import re
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -11,9 +10,21 @@ import time
 # options.add_argument('--ignore-ssl-errors')
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
+def youtube_link(song_name):
+    song_name = song_name.strip().lower()
+    song_name = song_name.replace(" ", "+")
+    song_search = "https://www.youtube.com/results?search_query=" + song_name
+    driver.get(song_search)
+    driver.implicitly_wait(3)
+
+    # Wait for search to complete and find video link
+    videos = driver.find_elements(By.ID, "video-title")
+    for video in videos:
+        if video.get_attribute("href"):
+            return video.get_attribute("href")
+
 def download_mp3(youtube_link):
-    # Open the YouTube to MP3 converter website
-    driver.get('https://ytmp3.cc/en13/')
+    driver.get("https://ytmp3.cc/en13/")
     driver.implicitly_wait(0.5)
 
     # Find the input field for the YouTube link
@@ -27,23 +38,21 @@ def download_mp3(youtube_link):
     convert_button.click()
 
     # Wait for the conversion to complete and find the download link
-    time.sleep(20)  # Adjust this based on the website's conversion time
+    time.sleep(20)  # Seems to work consistently for videos 8mins or less
     download_button = driver.find_element(By.XPATH, "//*[@id='download']/a[1]")
 
     # Click the download link
     download_button.click()
-    time.sleep(5)
+    time.sleep(5)  # Time for downloading to finish
 
-def is_valid_youtube_url(url):
-    youtube_regex = re.compile(
-        r'^(https?://)?(www\.)?youtube\.com/watch\?v=[\w-]+(&\w+=[\w-]+)*$'
-        r'|(https?://)?(www\.)?youtu\.be/[\w-]+$', re.IGNORECASE)
-    return re.match(youtube_regex, url) is not None
+def main():
+    songs_input = input("Enter Songs Separated By Commas: ")
+    songs = [song.strip() for song in songs_input.split(",")]
+    for song in songs:
+        download_mp3(youtube_link(song))
 
-# Example usage
-youtube_link = input("Enter the YouTube link: ")
-if youtube_link and is_valid_youtube_url(youtube_link):
-    download_mp3(youtube_link)
+    # Close the browser
+    driver.quit()
 
-# Close the browser
-driver.quit()
+if __name__ == "__main__":
+    main()
