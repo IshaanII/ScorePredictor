@@ -1,2 +1,2 @@
 # YoutubeToMP3
-Automatically converts from YouTube to MP3
+YouTube to MP3 converters require you to manually input YouTube links for each song you want to convert. This tool allows users to input as many song names as they want and autonatically converts and downloads each song.
