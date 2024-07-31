@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Youtube to MP3 Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+</head>
+<body>
+    <div id="download-status">
+        <h1>Download Status</h1>
+        <ul>
+            {% for song in status %}
+                <li>{{ song }}: {{ 'Success' }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

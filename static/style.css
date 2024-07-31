@@ -1,0 +1,82 @@
+/* Body background */
+body {
+    background-color: #f4f4f4;
+}
+
+/* Custom fonts */
+h1 {
+    text-align: center; /* Center the text */
+    font-family: 'Droid Serif', Georgia, Times, serif;
+}
+ 
+label {
+    font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
+}
+
+/* Formatting welcome message */
+#welcome-message, #download-status {
+    text-align: center; /* Center the text */
+    margin-bottom: 20px; /* Add some space below the message */
+}
+
+#welcome-message h1, #download-status h1 {
+    font-size: 36px; /* Adjust font size */
+    color: #333; /* Text color */
+}
+
+#welcome-message p {
+    font-size: 18px; /* Adjust font size */
+    color: #666; /* Text color */
+}
+
+/* Style the form container */
+form {
+    margin: 20px auto; /* Center horizontally */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 500px;
+    background-color: #fff; /* Form background color */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Style the form input fields */
+textarea {
+    width: calc(100% - 22px); /* Adjust width to account for padding */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    overflow: hidden;
+}
+
+/* Change the submit button color on hover */
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Style the submit button */
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}

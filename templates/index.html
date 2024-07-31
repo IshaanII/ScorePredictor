@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Youtube to MP3 Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+</head>
+<body>
+    <div id="welcome-message">
+        <h1>Download Your Favorite Songs!</h1>
+        <form action="http://localhost:5000/progress" method="POST">
+            <label for="songs">Songs:</label>
+            <textarea id="songs" name="songs" placeholder="Enter song names separated by commas" rows="1" required></textarea>
+            <input type="submit" value="Convert">
+        </form>
+    </div>
+    <script>
+        const textarea = document.getElementById('songs');
+
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto'; // Reset height to auto
+            this.style.height = (this.scrollHeight) + 'px'; // Set height to the scroll height
+        });
+
+        // Initialize the height based on initial content
+        textarea.style.height = textarea.scrollHeight + 'px';
+    </script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+from flask import Flask, render_template, request, send_file
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -5,9 +6,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 
-# options = webdriver.ChromeOptions()
-# options.add_argument('--ignore-certificate-errors')
-# options.add_argument('--ignore-ssl-errors')
+app = Flask(__name__)
+
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
 def youtube_link(song_name):
@@ -45,14 +45,23 @@ def download_mp3(youtube_link):
     download_button.click()
     time.sleep(5)  # Time for downloading to finish
 
-def main():
-    songs_input = input("Enter Songs Separated By Commas: ")
-    songs = [song.strip() for song in songs_input.split(",")]
-    for song in songs:
-        download_mp3(youtube_link(song))
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    return render_template('index.html')
+
+@app.route('/progress', methods=['GET', 'POST'])
+def progress():
+    if request.method == "POST":
+        songs_input = request.form['songs']
+        songs = [song.strip() for song in songs_input.split(",")]
+        status = []
+        for song in songs:
+            download_mp3(youtube_link(song))
+            status.append(song)
 
     # Close the browser
     driver.quit()
+    return render_template('progress.html', status=status)
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
