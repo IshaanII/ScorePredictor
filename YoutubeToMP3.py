@@ -34,6 +34,8 @@ def download_mp3(youtube_link):
     convert_button = driver.find_element(By.XPATH, "//*[@id='converter']/div[3]/div[2]/input")
 
     # Paste link and click convert button
+    input_field.click()
+    input_field.clear()
     input_field.send_keys(youtube_link)
     convert_button.click()
 
